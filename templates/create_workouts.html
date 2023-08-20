@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create Workouts
+{% endblock %}
+
+{% block main %}
+<form action="/create_workouts" method="post">
+    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="name" name="name" placeholder="{{ request.form['name'] }}" value="{{ request.form['name'] }}" type="text">
+    <br>
+    <br>
+    <button class="btn btn-primary" type="submit" name="AddEx" value="AddEx">Add Exercise</button>
+    <button style="background-color:red; border-color: red;" class="btn btn-primary" type="submit" name="RemoveEx" value="RemoveEx">Remove Exercise</button>
+    <br>
+    <br>
+    {% for i in range(number) %}
+        Exercise: <input name="Ex{{i}}" value="{{ request.form['Ex{}'.format(i)] }}"></input> Sets: <input name="Set{{i}}" value="{{ request.form['Set{}'.format(i)] }}"></input> Reps: <input name="Rep{{i}}" value="{{ request.form['Rep{}'.format(i)] }}"></input> Weight/Time: <input name="Weight{{i}}" value="{{ request.form['Weight{}'.format(i)] }}"></input>
+        <br>
+        <br>
+    {% endfor %}
+    <br>
+    <button style="background-color:green; border-color: green;" class="btn btn-primary" type="submit" name="Complete" value="Complete">Complete Workout</button>
+    {% if error %}  
+        <p style="color:red"><strong>Error:</strong> {{error}}</p>  
+    {% endif %}
+    {% if success %}  
+        <p style="color:green"><strong>Sucessfully Created!</strong></p>  
+    {% endif %}
+</form>
+{% endblock %}

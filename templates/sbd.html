@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+      SBD
+{% endblock %}
+
+{% block main %}
+<form action="/sbd" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="Squat" name="Squat" placeholder="Squat" type="number" value="{{ squat }}">
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto w-auto" id="Bench" name="Bench" placeholder="Bench" type="number" value="{{ bench }}">
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto w-auto" id="Deadlift" name="Deadlift" placeholder="Deadlift" type="number" value="{{ deadlift }}">
+    </div>
+    <button class="btn btn-primary" type="submit">Enter</button>
+    <br>
+    <br>
+    {% if error %}  
+        <p style="color:red"><strong>Error:</strong> {{error}}</p>  
+    {% endif %}
+    {% if success %}  
+        <p style="color:green"><strong>Sucessfully Changed!</strong></p>  
+    {% endif %}  
+</form>
+{% endblock %}

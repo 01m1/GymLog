@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   Progress
+{% endblock %}
+
+{% block main %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<body>
+   <canvas id="lineChart" width="900" height="400"></canvas>
+   <script>
+      var ctx = document.getElementById("lineChart").getContext("2d")
+      var lineChart = new Chart(ctx, {
+         type: "line",
+         data: {
+            labels: {{ squat_labels | safe }}, 
+            datasets: [
+               {
+                  label: "Squat",
+                  data: {{ squat_values | safe }},
+                  fill: true,
+                  borderColor: "#537fbe",
+                  lineTension: 0.2
+               },
+               {
+                  label: "Bench",
+                  data: {{ bench_values | safe }},
+                  fill: true,
+                  borderColor: "green",
+                  lineTension: 0.2
+               },
+               {
+                  label: "Deadlift",
+                  data: {{ deadlift_values | safe }},
+                  fill: true,
+                  borderColor: "red",
+                  lineTension: 0.2
+               }
+            ]
+         },
+         options : {
+            responsive: true
+         }
+      })
+   </script>
+</body>
+{% endblock %}

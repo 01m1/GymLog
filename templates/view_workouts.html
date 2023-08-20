@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View Workouts
+{% endblock %}
+
+{% block main %}
+<script>
+    function deleted() {
+      alert("Successfully Deleted!");
+    }
+</script>
+    
+<form action="/view_workouts" method="post">
+    {% if exercises %}
+        {% for exercise in exercises %}
+            <h1>{{ exercise[0] }}</h1>
+            {% set exercised = exercise[1:] %}
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <th>
+                        Exercise
+                    </th>
+                    <th>
+                        Sets
+                    </th>
+                    <th>
+                        Reps
+                    </th>
+                    <th>
+                        Weight/Time
+                    </th>
+                </tr>       
+                {% for thing in exercised %}
+                    <tr>
+                        {% for t in thing %}
+                            <td>{{ t }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <button class="btn btn-primary" type="submit" name="Edit" value="Edit{{exercise[0]}}" style="background-color: rgb(239, 174, 22); border-color: rgb(239, 174, 22);">Edit</button>
+            <button class="btn btn-primary" type="submit" onclick="deleted()" name="Delete" value="Delete{{exercise[0]}}" style="background-color: red; border-color: red;">Delete</button>
+            <br>
+            <br>
+        {% endfor %}
+    {% endif %}
+    
+</form>
+{% endblock %}

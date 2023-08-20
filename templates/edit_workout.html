@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View Workouts
+{% endblock %}
+
+{% block main %}
+<script>
+    function deleted() {
+      alert("Successfully Deleted!");
+    }
+</script>
+    
+<form action="/view_workouts" method="post">
+    {% if exercises %}
+        {% for exercise in exercises %}
+            <input value="{{exercise[0]}}" name="named" id="named">
+            <br>
+            <br>
+            {% set exercised = exercise[1:] %}
+            {% set count = namespace(value=1) %}
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <th>
+                        Exercise
+                    </th>
+                    <th>
+                        Sets
+                    </th>
+                    <th>
+                        Reps
+                    </th>
+                    <th>
+                        Weight/Time
+                    </th>
+                </tr>       
+                {% for thing in exercised %}
+                    <tr>
+                        {% for t in thing %}
+                            <td><input name="{{count.value}}" value="{{t}}"></td>
+                            {% set count.value = count.value + 1 %}
+                            
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <button class="btn btn-primary" type="submit" name="Save" value="Save{{exercise}}" style="background-color: rgb(22, 239, 120); border-color: rgb(22, 239, 120);">Save</button>
+            <br>
+        {% endfor %}
+    {% endif %}
+    
+</form>
+{% endblock %}
