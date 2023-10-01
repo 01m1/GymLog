@@ -34,7 +34,7 @@ def login_required(f):
 def home(): 
     if db.execute("SELECT username FROM users WHERE userid=?",(session.get("user_id"),)).fetchone():
         username = db.execute("SELECT username FROM users WHERE userid=?",(session.get("user_id"),)).fetchone()[0]
-        return render_template("home.html",name=username)
+        return render_template("index.html",name=username)
     else:
         return render_template("layout.html")
 
