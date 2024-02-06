@@ -293,7 +293,7 @@ def register():
             "INSERT INTO users (userid, username, hash, squat, bench, deadlift) VALUES (?,?,?,0,0,0)",
             (session.get("user_id"),
             str(request.form.get("username")),
-            str(generate_password_hash(password, method="pbkdf2", salt_length=16)))
+            str(generate_password_hash(password, method="sha256", salt_length=16)))
         )
 
         name = request.form.get("username")
